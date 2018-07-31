@@ -1,15 +1,20 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import 'isomorphic-fetch';
-const logo = require('./logo.svg') as string;
 
 // Use Javascript module in Typescript
 // https://stackoverflow.com/questions/38224232/how-to-consume-npm-modules-from-typescript
 const ImageUploader: any = require('react-images-upload');
 
-export class FetchData extends React.Component<RouteComponentProps<{}>, {}> {
+interface CounterState {
+    url: string;
+    prediction: string;
+}
+
+export class AnimalLabel extends React.Component<RouteComponentProps<{}>, CounterState> {
     constructor(props: any) {
         super(props);
+        this.state = { url: "", prediction: "" };
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -24,7 +29,7 @@ export class FetchData extends React.Component<RouteComponentProps<{}>, {}> {
         for(var name in pictures){
             formData.append(name, pictures[name]);
         }
-        fetch('http://localhost:49492/api/storage/photoUpload', {
+        fetch('https://tnc-ai-web-api.azurewebsites.net/api/storage/photoUpload', {
             method: 'POST',
             headers: new Headers({
                 'Access-Control-Allow-Origin': '*',
@@ -43,7 +48,15 @@ export class FetchData extends React.Component<RouteComponentProps<{}>, {}> {
 
     render() {
         return <div>
+            <header className="App-header">
+                <img src='/images/chinariver.jpg' alt="logo" />
+                <h1 className="App-title">Upload a pooto to see the prediction.</h1>
+            </header>
             <input type="file" onChange={(e) => this.handleChange(e.target.files)} />
+            <figure>
+                <figcaption> {this.state.prediction} </figcaption>
+                <img src={this.state.url} alt='photoUrl' />
+            </figure>
         </div>;
     }
 }

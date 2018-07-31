@@ -12,24 +12,29 @@ export class NavMenu extends React.Component<{}, {}> {
                         <span className='icon-bar'></span>
                         <span className='icon-bar'></span>
                     </button>
-                    <Link className='navbar-brand' to={ '/' }>my_new_app</Link>
+                    <Link className='navbar-brand' to={'/'}>The Nature Conservancy</Link>
                 </div>
                 <div className='clearfix'></div>
                 <div className='navbar-collapse collapse'>
                     <ul className='nav navbar-nav'>
                         <li>
                             <NavLink to={ '/' } exact activeClassName='active'>
-                                <span className='glyphicon glyphicon-home'></span> Home
+                                <span className='glyphicon glyphicon-home'></span>Home
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={ '/counter' } activeClassName='active'>
-                                <span className='glyphicon glyphicon-education'></span> Counter
+                            <NavLink to={'/AnimalLabel'} activeClassName='active'>
+                                <span className='glyphicon glyphicon-th-list'></span>Wildlife label
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={ '/fetchdata' } activeClassName='active'>
-                                <span className='glyphicon glyphicon-th-list'></span> Fetch data
+                            <NavLink to={ '/Reports' } activeClassName='active'>
+                                <span className='glyphicon glyphicon-education'></span>Reports
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/Contact'} activeClassName='active'>
+                                <span className='glyphicon glyphicon-education'></span>Contact
                             </NavLink>
                         </li>
                     </ul>

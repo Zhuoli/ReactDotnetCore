@@ -1,40 +1,55 @@
 import * as React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import * as $ from "jquery";
 
-export class NavMenu extends React.Component<{}, {}> {
+export class NavMenu extends React.Component {
     public render() {
-        return <div className='main-nav'>
-                <div className='navbar navbar-inverse'>
-                <div className='navbar-header'>
-                    <button type='button' className='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
-                        <span className='sr-only'>Toggle navigation</span>
-                        <span className='icon-bar'></span>
-                        <span className='icon-bar'></span>
-                        <span className='icon-bar'></span>
-                    </button>
-                    <Link className='navbar-brand' to={ '/' }>my_new_app</Link>
-                </div>
-                <div className='clearfix'></div>
-                <div className='navbar-collapse collapse'>
-                    <ul className='nav navbar-nav'>
-                        <li>
-                            <NavLink to={ '/' } exact activeClassName='active'>
-                                <span className='glyphicon glyphicon-home'></span> Home
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={ '/counter' } activeClassName='active'>
-                                <span className='glyphicon glyphicon-education'></span> Counter
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={ '/fetchdata' } activeClassName='active'>
-                                <span className='glyphicon glyphicon-th-list'></span> Fetch data
-                            </NavLink>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>;
+
+        return (
+            <Navbar fluid collapseOnSelect>
+                <Navbar.Header>
+                    <Navbar.Brand>
+                        <Link to="/">Wildlife Labelling</Link>
+                    </Navbar.Brand>
+                    <Navbar.Toggle />
+                </Navbar.Header>
+                <Navbar.Collapse>
+                    <Nav pullRight>
+                        <LinkContainer exact to="/" className="home-nav" onClick={this.onNavItemClick}>
+                            <NavItem>Home</NavItem>
+                        </LinkContainer>
+                        <NavDropdown id="label-dropdown" onClick={this.onNavDropdownClick} eventKey={3} title="Wildlife Label">
+                            <LinkContainer exact to="/AnimalLabel" className="label-nav">
+                                <MenuItem onClick={this.onLabelItemsClick} eventKey={3.1}>Predict</MenuItem>
+                            </LinkContainer>
+                        </NavDropdown>
+                        <LinkContainer exact to="/Reports" onClick={this.onNavItemClick}>
+                            <NavItem>Reports</NavItem>
+                        </LinkContainer>
+                        <LinkContainer exact to="/Contact" onClick={this.onNavItemClick}>
+                            <NavItem>Contact</NavItem>
+                        </LinkContainer>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
+        );
+    }
+
+    private onNavItemClick() {
+        document.getElementById("label-dropdown")!.style.backgroundColor = "";
+    }
+
+    private onNavDropdownClick() {
+        $(".home-nav").removeClass('active');
+    }
+
+    private onLabelItemsClick() {
+        debugger;
+        setTimeout(() => {
+            $(".label-nav").removeClass('active');
+            document.getElementById("label-dropdown")!.style.backgroundColor = "#e7e7e7";
+        });
     }
 }

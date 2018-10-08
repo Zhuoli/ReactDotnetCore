@@ -1,10 +1,9 @@
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
-namespace my_new_app.Controllers
+namespace tnc_ai_web.Controllers
 {
     [Route("api/[controller]")]
     public class SampleDataController : Controller
